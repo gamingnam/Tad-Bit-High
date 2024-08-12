@@ -5,30 +5,30 @@ using UnityEngine;
 
 public class MovementScript : MonoBehaviour
 {
-    [SerializeField] float speed = 10f;
-    private float Vertical;
-    private float Horizontal;
-    private Vector2 movement;
-    private Rigidbody2D rb;
-
+    public Vector3 leftForce;
+    public Vector3 rightForce;
+    public Vector3 upForce;
+    public GameObject groundCheck;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Horizontal = Input.GetAxis("Horizontal");
-        Vertical = Input.GetAxis("Vertical");
-        
-        movement = new Vector2 (Horizontal*speed, Vertical*speed);
-        
-        
-    }
-    private void FixedUpdate()
-    {
-        rb.velocity = movement;
+        if (Input.GetKey(KeyCode.A))
+        {
+            GetComponent<Rigidbody2D>().AddForce(leftForce);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            GetComponent<Rigidbody2D>().AddForce(rightForce);
+        }
+        if (Input.GetKey(KeyCode.W) && Physics2D.OverlapCircle(new Vector2(groundCheck.transform.position.x, groundCheck.transform.position.y), 0.1f, LayerMask.GetMask("Ground")))
+        {
+            GetComponent<Rigidbody2D>().AddForce(upForce);
+        }
     }
 }
