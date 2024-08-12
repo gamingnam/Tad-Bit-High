@@ -12,7 +12,6 @@ public class StartManager : MonoBehaviour
 
     private void Start()
     {
-        SceneManager.SetActiveScene(SceneManager.GetActiveScene());
     }
     public void StartGame()
     {
