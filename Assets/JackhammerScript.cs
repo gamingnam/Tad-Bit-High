@@ -11,6 +11,7 @@ public class JackhammerScript : MonoBehaviour
     [SerializeField] Transform rotationPoint;
     [SerializeField] Transform impactPoint;
     public float lookAngle;
+    [SerializeField] GameObject Dust;
 
     
     // Start is called before the first frame update
@@ -23,7 +24,7 @@ public class JackhammerScript : MonoBehaviour
     void Update()
     {
         HandleMousePos();
-        HandleUseJackHammer();
+        HandleUseJackHammer();  
 
     }
     private void HandleUseJackHammer()
@@ -32,6 +33,7 @@ public class JackhammerScript : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && Physics2D.OverlapCircle(new Vector2(impactPoint.position.x, impactPoint.position.y), 0.1f,LayerMask.GetMask("Ground")))
         {
             rb.AddForce((mouseWorldPos-new Vector2(transform.position.x,transform.position.y)).normalized * -1 * pushPower, ForceMode2D.Impulse);
+            Instantiate(Dust, impactPoint);
         }
     }
     private void HandleMousePos()
