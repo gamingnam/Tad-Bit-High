@@ -6,15 +6,12 @@ public class CameraScript : MonoBehaviour
 {
     private GameObject player;
     private Vector3 playerPos;
-    private Camera cam;
     private Vector3 velocity = Vector3.zero;
     public float smooth = 0.25f;
 
     // Start is called before the first frame update
     void Start()
-    {
-        cam = Camera.main;
-        player = GameObject.Find("Player");
+    {        player = GameObject.Find("Player");
 
     }
 
