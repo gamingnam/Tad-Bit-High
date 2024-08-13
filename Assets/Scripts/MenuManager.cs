@@ -6,18 +6,30 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField] Button resumeButton;
     [SerializeField] Button startButton;
     [SerializeField] Button settingsButton;
     [SerializeField] Button quitButton;
+    [SerializeField] Button menuButton;
+    [SerializeField] GameObject loadingScreen;
+    [SerializeField] Slider slider;
+    [SerializeField] GameObject pauseMenu;
 
-    private void Start()
+    void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+        }
+    }
+
+    public void Resume()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
     }
     
-    public void StartGame()
-    {
-        SceneManager.LoadScene("LevelOne");
-    }
     public void LoadLevel(int sceneIndex)
     {
         StartCoroutine(LoadAsync(sceneIndex));
@@ -26,9 +38,11 @@ public class MenuManager : MonoBehaviour
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
+        loadingScreen.SetActive(true);
         while (!operation.isDone)
         {
-            print(operation.progress);
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            slider.value = progress;
             yield return null;
         }
     }
