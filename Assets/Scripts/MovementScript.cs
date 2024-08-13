@@ -26,7 +26,7 @@ public class MovementScript : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().AddForce(rightForce);
         }
-        if (Input.GetKey(KeyCode.W) && Physics2D.OverlapCircle(new Vector2(groundCheck.transform.position.x, groundCheck.transform.position.y), 0.1f, LayerMask.GetMask("Ground")))
+        if (Input.GetKey(KeyCode.W) && Physics2D.OverlapCircle(new Vector2(groundCheck.transform.position.x, groundCheck.transform.position.y), 0.5f, LayerMask.GetMask("Ground")))
         {
             GetComponent<Rigidbody2D>().AddForce(upForce);
         }
