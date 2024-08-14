@@ -41,7 +41,7 @@ public class JackhammerScript : MonoBehaviour
                 Instantiate(Dust,impactVector, Quaternion.identity);
             }
             rb.AddForce((mouseWorldPos-new Vector2(transform.position.x,transform.position.y)).normalized * -1 * pushPower, ForceMode2D.Impulse);
-            cam.GetComponent<CameraScript>().Screenshake = true;
+            cam.GetComponent<CameraScript>().Screenshake = true
         }
     }
     private void HandleMousePos()

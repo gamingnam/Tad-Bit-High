@@ -6,7 +6,7 @@ public class NailGunScript : MonoBehaviour
 {
     
     public GameObject nailPrefab;
-    public Vector3 offset;
+    public Transform firePoint;
    
     public GameObject leftNailPrefab;
     public GameObject rightNailPrefab;
@@ -40,13 +40,13 @@ public class NailGunScript : MonoBehaviour
         {
             if(playerFacing == 1)
             { 
-                Instantiate(rightNailPrefab, GetComponent<Transform>().position, Quaternion.identity);
+                Instantiate(rightNailPrefab,new Vector2(firePoint.transform.position.x,firePoint.transform.position.y), Quaternion.identity);
                 NailCount -= 1;
             }
             if (playerFacing == -1)
 
             {
-                Instantiate(leftNailPrefab, GetComponent<Transform>().position, Quaternion.identity);
+                Instantiate(leftNailPrefab, new Vector2(firePoint.transform.position.x, firePoint.transform.position.y), Quaternion.identity);
                 NailCount -= 1;
             }
         }
