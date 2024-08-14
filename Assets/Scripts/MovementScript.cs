@@ -30,10 +30,6 @@ public class MovementScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            Instantiate(NailGunPrefab, GetComponent<Transform>().position, Quaternion.identity);
-        }
         animatorOne.SetBool("isRunning", false);
         if (Input.GetKey(KeyCode.A))
         {

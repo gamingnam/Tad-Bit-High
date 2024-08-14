@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class nailScript : MonoBehaviour
 {
-    public Vector3 nailMove;
+    public Vector3 nailDirection;
     public float nailForce = 5f;
     public float nailTimer;
     private Rigidbody2D rb2d;
@@ -18,6 +18,7 @@ public class nailScript : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         originalConstraints = rb2d.constraints;
+
     }
 
     // Update is called once per frame
@@ -52,11 +53,5 @@ public class nailScript : MonoBehaviour
         }
         */
     }
-    private void HandleMousePos()
-    {
-        mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        lookAngle = Mathf.Atan2(mouseWorldPos.x - rotationPoint.transform.position.x, mouseWorldPos.y - rotationPoint.transform.position.y) * Mathf.Rad2Deg;
-        rotationPoint.transform.rotation = Quaternion.AngleAxis(lookAngle * -1, Vector3.forward);
-    }
-
+    
 }

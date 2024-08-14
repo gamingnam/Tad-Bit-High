@@ -15,7 +15,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Slider slider;
     [SerializeField] GameObject pauseMenu;
 
-    public static bool isPaused;
+    public bool isPaused;
+
+    [SerializeField] float masterVolume;
+    [SerializeField] float musicVolume;
+    [SerializeField] float SFXVolume;
+
 
     void Update()
     {
