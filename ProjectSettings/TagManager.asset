@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Ground
   - WallJump
-  - wall
+  - Obstacle
   layers:
   - Default
   - TransparentFX
