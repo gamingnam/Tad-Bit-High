@@ -11,12 +11,25 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Button settingsButton;
     [SerializeField] Button quitButton;
     [SerializeField] Button menuButton;
-    [SerializeField] GameObject LoadingScreen;
+    [SerializeField] GameObject loadingScreen;
     [SerializeField] Slider slider;
+    [SerializeField] GameObject pauseMenu;
 
-    private void Start()
+    public static bool isPaused;
+
+    void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+        }
+    }
 
+    public void Resume()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
     }
     
     public void LoadLevel(int sceneIndex)
@@ -27,7 +40,7 @@ public class MenuManager : MonoBehaviour
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
-        LoadingScreen.SetActive(true);
+        loadingScreen.SetActive(true);
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
