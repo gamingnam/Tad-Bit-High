@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class JackhammerScript : MonoBehaviour
 {
@@ -12,12 +13,13 @@ public class JackhammerScript : MonoBehaviour
     [SerializeField] Transform impactPoint;
     public float lookAngle;
     [SerializeField] GameObject Dust;
-
+    private Camera cam;
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -32,8 +34,14 @@ public class JackhammerScript : MonoBehaviour
         
         if (Input.GetButtonDown("Fire1") && Physics2D.OverlapCircle(new Vector2(impactPoint.position.x, impactPoint.position.y), 0.1f,LayerMask.GetMask("Ground")))
         {
+            Vector2 impactVector = new Vector2(impactPoint.position.x, impactPoint.position.y);
+            RaycastHit2D hit = Physics2D.Raycast(impactVector, (mouseWorldPos-impactVector).normalized,0.5f);
+            if (hit.collider != null)
+            {
+                Instantiate(Dust,impactVector, Quaternion.identity);
+            }
             rb.AddForce((mouseWorldPos-new Vector2(transform.position.x,transform.position.y)).normalized * -1 * pushPower, ForceMode2D.Impulse);
-            Instantiate(Dust, impactPoint);
+            cam.GetComponent<CameraScript>().Screenshake = true;
         }
     }
     private void HandleMousePos()

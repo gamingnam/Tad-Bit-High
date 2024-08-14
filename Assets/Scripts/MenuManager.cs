@@ -15,6 +15,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Slider slider;
     [SerializeField] GameObject pauseMenu;
 
+    public static bool isPaused;
+
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
