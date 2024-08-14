@@ -42,6 +42,7 @@ public class nailScript : MonoBehaviour
 
             nailMove = new Vector3(0, 0, 0);
             rb2d.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezePositionX;
+
         }
 
         /*else if (collision.gameObject.tag == "nail")
@@ -51,5 +52,11 @@ public class nailScript : MonoBehaviour
         }
         */
     }
-   
+    private void HandleMousePos()
+    {
+        mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        lookAngle = Mathf.Atan2(mouseWorldPos.x - rotationPoint.transform.position.x, mouseWorldPos.y - rotationPoint.transform.position.y) * Mathf.Rad2Deg;
+        rotationPoint.transform.rotation = Quaternion.AngleAxis(lookAngle * -1, Vector3.forward);
+    }
+
 }
