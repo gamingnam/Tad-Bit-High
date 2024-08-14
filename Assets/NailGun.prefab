@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3633286313540537951}
   - component: {fileID: 4254642597774441418}
   - component: {fileID: 6637256402660120034}
+  - component: {fileID: 7263086849544275384}
   m_Layer: 0
   m_Name: NailGun
   m_TagString: Untagged
@@ -29,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 9184594496242642011}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.472898, y: -0.68130016, z: 0}
-  m_LocalScale: {x: 1.4971001, y: 1.2762002, z: 1}
+  m_LocalPosition: {x: 4.3286, y: -0.68130016, z: 0}
+  m_LocalScale: {x: 1.3161967, y: 1.2762002, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -104,7 +105,8 @@ MonoBehaviour:
   leftNailPrefab: {fileID: 40864655047044634, guid: ee68681b320b31942bfc4f69c292f2b2, type: 3}
   rightNailPrefab: {fileID: 8203642083021830863, guid: e4760e0522c644143a8e3b310e7652da, type: 3}
   playerFacing: 0
-  nailCount: 0
+  NailCount: 0
+  isNailGunAvailable: 0
 --- !u!50 &4254642597774441418
 Rigidbody2D:
   serializedVersion: 4
@@ -177,3 +179,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.45, y: 0.54}
   m_EdgeRadius: 0
+--- !u!114 &7263086849544275384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9184594496242642011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1910e821c714e4b41a8c537a48b03a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookAngle: 0
+  mouseWorldPos: {x: 0, y: 0}
