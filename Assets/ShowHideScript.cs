@@ -24,7 +24,7 @@ public class ShowHideScript : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
+            sr.sprite = itemSprites[2];
         }
     }
 }
