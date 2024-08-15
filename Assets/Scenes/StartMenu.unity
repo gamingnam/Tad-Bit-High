@@ -1635,6 +1635,10 @@ MonoBehaviour:
   loadingScreen: {fileID: 267287720}
   slider: {fileID: 635674990}
   pauseMenu: {fileID: 0}
+  isPaused: 0
+  masterVolume: 0
+  musicVolume: 0
+  SFXVolume: 0
 --- !u!1 &1643575746
 GameObject:
   m_ObjectHideFlags: 0

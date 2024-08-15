@@ -5,7 +5,7 @@ using UnityEngine;
 public class nailScript : MonoBehaviour
 {
     public Vector3 nailDirection;
-    public float nailForce = 10f;
+    public float nailForce = 0.5f;
     public float nailTimer;
     public float destroyTimer;
     private Rigidbody2D rb2d;
@@ -28,12 +28,7 @@ public class nailScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (!collided)
-        {
-            rb2d.AddForce(nailDirection * nailForce * Time.deltaTime, ForceMode2D.Impulse);
-        }
-        else if (collided)
+    {if (collided)
         {
             nailTimer += Time.deltaTime;
             if (nailTimer > 5f)
