@@ -8,15 +8,19 @@ public class MovementScript : MonoBehaviour
     public Vector3 leftForce;
     public Vector3 rightForce;
     public Vector3 upForce;
-    public Vector3 jumpForce;
+    public Vector3 wallJumpForce;
 
     public GameObject groundCheck;
-    //public Transform groundCheckVisual;
+    public Transform groundCheckVisual;
     public float groundCheckRange;
     public bool jumpCheck;
     public float jumpingTimer;
+
+    /*
     public float wallJumpingTimer;
     public bool wallJumpCheck;
+    public float waitTimer;
+    */
     public Animator animatorOne;
 
     public float slidingDuration;
@@ -26,15 +30,13 @@ public class MovementScript : MonoBehaviour
     public BoxCollider2D defaultCollider;
     public BoxCollider2D slideCollider;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
         defaultCollider.enabled = true;
         slideCollider.enabled = false;
         jumpCheck = true;
-        wallJumpCheck = false;
+        //wallJumpCheck = false;
         slideCheck = false;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -42,39 +44,23 @@ public class MovementScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        slidingCooldown += Time.deltaTime;
+        //Basic Movement
         animatorOne.SetBool("isRunning", false);
         if (Input.GetKey(KeyCode.A))
         {
+            slidingCooldown += Time.deltaTime;
             GetComponent<Rigidbody2D>().AddForce(leftForce);
             animatorOne.SetBool("isRunning", true);
         }
         if (Input.GetKey(KeyCode.D))
         {
+            slidingCooldown += Time.deltaTime;
             GetComponent<Rigidbody2D>().AddForce(rightForce);
             animatorOne.SetBool("isRunning", true);
         }
-        //Regular Jump
-        if (Input.GetKey(KeyCode.W) && jumpCheck && Physics2D.OverlapCircle(new Vector2(groundCheck.transform.position.x, groundCheck.transform.position.y), 0.5f))
-        {
-            animatorOne.SetBool("isJumping", true);
-            GetComponent<Rigidbody2D>().AddForce(upForce);
-        }
 
-        //Wall Jump
-        if (Input.GetKey(KeyCode.W) && wallJumpCheck)
-        {
-            animatorOne.SetBool("isJumping", true);
-            GetComponent<Rigidbody2D>().AddForce(jumpForce);
-            wallJumpingTimer += Time.deltaTime;
-        }
-        if (wallJumpingTimer > 0)
-        {
-            wallJumpCheck = false;
-        }
         //Sliding
-        //Create the sliding animation, disabling the main collider for the sliding one (and later activating the main one again), and then lowering the linear drag
-        if (slidingCooldown >= 2f)
+        if (slidingCooldown >= 1f)
         {
             if (Input.GetKey(KeyCode.S) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
             {
@@ -96,7 +82,7 @@ public class MovementScript : MonoBehaviour
                     rb.drag = 8;
                 }
             }
-            if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKey(KeyCode.W) || slidingDuration >= 1.8f)
+            if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || slidingDuration >= 1.8f)
             {
                 defaultCollider.enabled = true;
                 slideCollider.enabled = false;
@@ -110,13 +96,53 @@ public class MovementScript : MonoBehaviour
 
     }
 
-    /*
+    public void Update()
+    {
+        //uPhysics2D.OverlapCircle(new Vector2(groundCheck.transform.position.x, groundCheck.transform.position.y), 0.5f);
+
+        //Regular 
+        if (Input.GetKeyDown(KeyCode.W) && jumpCheck)
+        {
+            animatorOne.SetBool("isJumping", true);
+            GetComponent<Rigidbody2D>().AddForce(upForce);
+            jumpCheck = false;
+        }
+
+        //Wall jump
+        /*
+        if (Input.GetKeyDown(KeyCode.W) && wallJumpCheck)
+        {
+            animatorOne.SetBool("isJumping", true);
+            GetComponent<Rigidbody2D>().AddForce(wallJumpForce);
+            wallJumpCheck = false;
+            //wallJumpingTimer += Time.deltaTime;
+        }
+        if (wallJumpingTimer > 0)
+        {
+            wallJumpCheck = false;
+        }
+
+        //Corner checking
+        if (wallJumpCheck && jumpCheck)
+        {
+            wallJumpCheck = false;
+            jumpCheck = false;
+            waitTimer += Time.deltaTime;
+            if (waitTimer >= 0.0001f)
+            {
+                jumpCheck = true;
+            }
+        }
+        */
+    }
+
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundCheckVisual.position, groundCheckRange);
     }
-    */
+    
     
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -124,24 +150,21 @@ public class MovementScript : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             animatorOne.SetBool("isJumping", false);
-            wallJumpingTimer = 0;
+            //wallJumpingTimer = 0;
+            //wallJumpCheck = false;
             jumpCheck = true;
-            wallJumpCheck = false;
         }
+        /*
         if (collision.gameObject.tag == "WallJump")
         {
             animatorOne.SetBool("isJumping", false);
             wallJumpingTimer = 0;
             wallJumpCheck = true;
         }
+        */
         if (collision.gameObject.tag == "Obstacle")
         {
             Destroy(gameObject);
         }
-    }
-
-    public void OnCollisionExit2D(Collision2D collision)
-    {
-        jumpCheck = false;
     }
 }
