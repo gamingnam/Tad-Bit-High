@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class CheckpointScript : MonoBehaviour
 {
+    [SerializeField] public int NextLevel;
+    [SerializeField] public Canvas canvas;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,10 @@ public class CheckpointScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GetComponent<MenuManager>().LoadLevel(4);
+        if(collision.gameObject.tag == "Player")
+        {
+            canvas.GetComponent<MenuManager>().LoadLevel(4);
+        }
+        
     }
 }
