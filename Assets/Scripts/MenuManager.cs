@@ -76,6 +76,7 @@ public class MenuManager : MonoBehaviour
     public void Restart()
     {
         LoadLevel(SceneManager.GetActiveScene().buildIndex);
-
+        Time.timeScale = 1f;
+        isPaused = false;
     }
 }

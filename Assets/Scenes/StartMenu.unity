@@ -1632,10 +1632,11 @@ MonoBehaviour:
   settingsButton: {fileID: 79913231}
   quitButton: {fileID: 277102027}
   menuButton: {fileID: 0}
+  restartButton: {fileID: 0}
   loadingScreen: {fileID: 267287720}
   slider: {fileID: 635674990}
   pauseMenu: {fileID: 0}
-  isPaused: 0
+  loseMenu: {fileID: 0}
   masterVolume: 0
   musicVolume: 0
   SFXVolume: 0

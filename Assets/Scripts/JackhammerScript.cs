@@ -17,6 +17,9 @@ public class JackhammerScript : MonoBehaviour
     [SerializeField] Transform jackhammerImpactPoint;
     public float pushPower;
 
+    [SerializeField] GameObject Jackhammer;
+    [SerializeField] GameObject NailGun;
+
     public Vector2 mouseWorldPos;
     public float lookAngle;
     
