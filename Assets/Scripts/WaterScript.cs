@@ -7,6 +7,7 @@ public class WaterScript : MonoBehaviour
 {
     private float yPos;
     [SerializeField] private float riseRate;
+    [SerializeField] public Canvas canvas;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,7 @@ public class WaterScript : MonoBehaviour
     {
         if(collider.gameObject.tag == "Player")
         {
-            GetComponent<MenuManager>().LoadLevel(SceneManager.GetActiveScene().buildIndex);
+            canvas.GetComponent<MenuManager>().Lose();
         }
     }
 }

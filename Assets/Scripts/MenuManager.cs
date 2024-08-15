@@ -11,11 +11,14 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Button settingsButton;
     [SerializeField] Button quitButton;
     [SerializeField] Button menuButton;
+    [SerializeField] Button restartButton;
+
     [SerializeField] GameObject loadingScreen;
     [SerializeField] Slider slider;
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject loseMenu;
 
-    public bool isPaused;
+    public static bool isPaused;
 
     [SerializeField] float masterVolume;
     [SerializeField] float musicVolume;
@@ -28,6 +31,7 @@ public class MenuManager : MonoBehaviour
         {
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
+            isPaused = true;
         }
     }
 
@@ -35,6 +39,7 @@ public class MenuManager : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
+        isPaused = false;
     }
     
     public void LoadLevel(int sceneIndex)
@@ -60,5 +65,17 @@ public class MenuManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void Lose()
+    {
+        loseMenu.SetActive(true);
+        isPaused = true;
+        Time.timeScale = 0f;
+    }
+    public void Restart()
+    {
+        LoadLevel(SceneManager.GetActiveScene().buildIndex);
+
     }
 }
