@@ -74,8 +74,8 @@ public class JackhammerScript : MonoBehaviour
         {
             nailGunFireRate = 0f;
             Vector2 dir = new Vector2(mouseWorldPos.x - nailFirePoint.position.x, mouseWorldPos.y - nailFirePoint.position.y);
-            nailScript nail = Instantiate(nailPrefab, new Vector3(nailFirePoint.position.x, nailFirePoint.position.y, nailFirePoint.position.z),Quaternion.identity);
-            nail.nailDirection = dir;
+            nailScript nail = Instantiate(nailPrefab, new Vector3(nailFirePoint.position.x, nailFirePoint.position.y, nailFirePoint.position.z),Quaternion.Euler(0,0,0-lookAngle));
+            nail.nailDirection = dir.normalized;
         }
     }
     private void HandleMousePos()
