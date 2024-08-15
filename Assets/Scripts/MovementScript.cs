@@ -55,7 +55,7 @@ public class MovementScript : MonoBehaviour
             animatorOne.SetBool("isRunning", true);
         }
         //Regular Jump
-        if (Input.GetKey(KeyCode.W) && jumpCheck && Physics2D.OverlapCircle(new Vector2(groundCheck.transform.position.x, groundCheck.transform.position.y), 0.5f, LayerMask.GetMask("Ground")))
+        if (Input.GetKey(KeyCode.W) && jumpCheck && Physics2D.OverlapCircle(new Vector2(groundCheck.transform.position.x, groundCheck.transform.position.y), 0.5f))
         {
             animatorOne.SetBool("isJumping", true);
             GetComponent<Rigidbody2D>().AddForce(upForce);
