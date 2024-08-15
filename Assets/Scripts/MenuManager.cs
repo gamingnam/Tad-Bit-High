@@ -25,6 +25,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField] float SFXVolume;
 
 
+    public void Start()
+    {
+
+    }
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
