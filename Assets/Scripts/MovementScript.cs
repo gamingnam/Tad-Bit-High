@@ -39,7 +39,7 @@ public class MovementScript : MonoBehaviour
         //wallJumpCheck = false;
         slideCheck = false;
         rb = GetComponent<Rigidbody2D>();
-    }
+}
 
     // Update is called once per frame
     void FixedUpdate()
@@ -75,14 +75,14 @@ public class MovementScript : MonoBehaviour
                 }
                 if (slidingDuration >= 1f)
                 {
-                    rb.drag = 5;
+                    rb.drag = 4;
                 }
                 if (slidingDuration >= 1.5f)
                 {
-                    rb.drag = 8;
+                    rb.drag = 5;
                 }
             }
-            if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || slidingDuration >= 1.8f)
+            if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || slidingDuration >= 1.6f || rb.velocity.x <= 0.0001f)
             {
                 defaultCollider.enabled = true;
                 slideCollider.enabled = false;
@@ -101,7 +101,7 @@ public class MovementScript : MonoBehaviour
         //uPhysics2D.OverlapCircle(new Vector2(groundCheck.transform.position.x, groundCheck.transform.position.y), 0.5f);
 
         //Regular 
-        if (Input.GetKeyDown(KeyCode.W) && jumpCheck)
+        if (Input.GetKeyDown(KeyCode.W) && jumpCheck && slideCheck == false)
         {
             animatorOne.SetBool("isJumping", true);
             GetComponent<Rigidbody2D>().AddForce(upForce);
@@ -162,9 +162,6 @@ public class MovementScript : MonoBehaviour
             wallJumpCheck = true;
         }
         */
-        if (collision.gameObject.tag == "Obstacle")
-        {
-            Destroy(gameObject);
-        }
+        //|| slideCollider.gameObject.tag == "Obstacle"
     }
 }
