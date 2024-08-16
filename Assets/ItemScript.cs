@@ -6,7 +6,8 @@ using static UnityEditor.PlayerSettings;
 
 public class ItemScript : MonoBehaviour
 {
-    public GameObject item;
+    [SerializeField] public Sprite[] itemSprites;
+    public SpriteRenderer sr;
 
     float speed = 5f;
     float height = 0.5f;
@@ -15,7 +16,7 @@ public class ItemScript : MonoBehaviour
 
     void Start()
     {
-        item = this.gameObject;
+        sr = GetComponent<SpriteRenderer>();
         pos = transform.position;
         ogY = pos.y;
     }
@@ -31,11 +32,11 @@ public class ItemScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            if(item = GameObject.Find("JackhammerItem"))
+            if(sr.sprite == itemSprites[0])
             {
                 collision.gameObject.GetComponent<JackhammerScript>().hasJackhammer = true;
             }
-            if (item = GameObject.Find("NailGunItem"))
+            if (sr.sprite == itemSprites[1])
             {
                 collision.gameObject.GetComponent<JackhammerScript>().hasNailGun = true;
             }

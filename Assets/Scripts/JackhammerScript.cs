@@ -62,11 +62,11 @@ public class JackhammerScript : MonoBehaviour
                     usingNailGun = false;
                 }
             }
-            if (usingJackhammer)
+            if (usingJackhammer && hasJackhammer)
             {
                 HandleUseJackHammer();
             }
-            else if (usingNailGun)
+            else if (usingNailGun && hasNailGun)
             {
                 HandleUseNailGun();
                 nailGunFireRate += Time.deltaTime;
