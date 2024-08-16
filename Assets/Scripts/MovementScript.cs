@@ -62,7 +62,7 @@ public class MovementScript : MonoBehaviour
         //Sliding
         if (slidingCooldown >= 1f)
         {
-            if (Input.GetKey(KeyCode.S) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
+            if (Input.GetKey(KeyCode.S) && rb.velocity != new Vector2 (0,0) &&(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
             {
                 defaultCollider.enabled = false;
                 slideCollider.enabled = true;
@@ -71,11 +71,11 @@ public class MovementScript : MonoBehaviour
                 slideCheck = true;
                 if (slidingDuration >= 0.5f)
                 {
-                    rb.drag = 3;
+                    rb.drag = 4;
                 }
                 if (slidingDuration >= 1f)
                 {
-                    rb.drag = 5;
+                    rb.drag = 6;
                 }
                 if (slidingDuration >= 1.5f)
                 {
@@ -101,7 +101,7 @@ public class MovementScript : MonoBehaviour
         //uPhysics2D.OverlapCircle(new Vector2(groundCheck.transform.position.x, groundCheck.transform.position.y), 0.5f);
 
         //Regular 
-        if (Input.GetKeyDown(KeyCode.W) && jumpCheck)
+        if (Input.GetKeyDown(KeyCode.W) && jumpCheck && slideCheck == false)
         {
             animatorOne.SetBool("isJumping", true);
             GetComponent<Rigidbody2D>().AddForce(upForce);
