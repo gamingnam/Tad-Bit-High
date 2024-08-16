@@ -16,10 +16,12 @@ public class ShowHideScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GetComponentInParent<JackhammerScript>().usingNailGun == true){
+        if(GetComponentInParent<JackhammerScript>().usingNailGun == true && GetComponentInParent<JackhammerScript>().hasNailGun == true)
+        {
             sr.sprite = itemSprites[0];
         }
-        else if (GetComponentInParent<JackhammerScript>().usingJackhammer == true){
+        else if (GetComponentInParent<JackhammerScript>().usingJackhammer == true && GetComponentInParent<JackhammerScript>().hasJackhammer == true)
+        {
             sr.sprite = itemSprites[1];
         }
         else
